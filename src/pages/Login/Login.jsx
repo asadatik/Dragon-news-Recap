@@ -18,7 +18,8 @@ const Login = () => {
 const handlegoogleLogin=()=>{
   googleLogin()
   .then(result =>  {
-    console.log(result.user)
+    console.log(result.user) 
+    //// /// // //Navigate after login ////
     Navigate(  Location?.state ? Location.state : '/' )
   } )
 }

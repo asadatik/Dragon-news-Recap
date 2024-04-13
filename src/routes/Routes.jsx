@@ -14,13 +14,13 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader :   ()=>fetch('/news.json')
+                
             },
             {
                   
                 path: '/ONews/:id',
                 element: <PrivetRoutes><NewsDtls></NewsDtls></PrivetRoutes>,
-                
+                loader :   ()=>fetch('/news.json')
             },
             {
                 path:"/login",
