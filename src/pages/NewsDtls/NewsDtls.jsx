@@ -6,6 +6,7 @@ import RightSideNav from "../Shared/RightSideNav/RightSideNav";
 
 const NewsDtls = () => {
     const {id} = useParams();
+   
 
     return (
         <div>  

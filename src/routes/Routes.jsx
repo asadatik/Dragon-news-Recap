@@ -19,8 +19,8 @@ const router = createBrowserRouter([
             {
                   
                 path: '/ONews/:id',
-                element: <PrivetRoutes><NewsDtls></NewsDtls></PrivetRoutes>
-               
+                element: <PrivetRoutes><NewsDtls></NewsDtls></PrivetRoutes>,
+                
             },
             {
                 path:"/login",

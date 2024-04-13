@@ -7,13 +7,21 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const Login = () => {
-  const{login} = useContext(AuthContext);
+  const{login, googleLogin} = useContext(AuthContext);
 
      const Location = useLocation();
     
           console.log("Location in the login page",Location);
 
           const Navigate =  useNavigate();
+     
+const handlegoogleLogin=()=>{
+  googleLogin()
+  .then(result =>  {
+    console.log(result.user)
+    Navigate(  Location?.state ? Location.state : '/' )
+  } )
+}
     
   const HandleLogin=(e)=>{
        e.preventDefault()
@@ -32,7 +40,7 @@ const Login = () => {
      })
   }   
 
-
+    
 
 
     return (
@@ -60,9 +68,12 @@ const Login = () => {
         <div className="form-control mt-6">
           <button className="btn btn-primary">Login</button>
         </div>
+       
       </form>
-        <h1>Do`t have an Account  <Link to='/register' className="text-lime-600" >Register</Link></h1>
+        <h1>Do`t have an Account ? <Link to='/register' className="text-lime-600" >Create an account</Link></h1>
+        <button onClick={handlegoogleLogin}   className="btn ml-40  " > Google Login </button>  
      </div>
+      
         </div>
     );
 };

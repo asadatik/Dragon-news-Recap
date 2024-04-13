@@ -1,21 +1,23 @@
 import { createContext, useEffect, useState } from "react";
 
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import app from "../firebase/firebase.config";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import auth from "../firebase/firebase.config";
+
 
 
 export const AuthContext = createContext(null) ;
-const auth = getAuth(app);
+
 
 const AuthProvider = ({children}) => {
-         
+
             const [user,setuser] = useState(null);  
+            console.log(user);
             const [loading, setLoading] = useState(false);
 // //////////////////////////////////
        
              const Creatuser = (email,passowrd)=>{
               setLoading(true)
-             return createUserWithEmailAndPassword(auth,email,passowrd);
+             return createUserWithEmailAndPassword(   auth,email,passowrd);
             }  
   // //////////////////////////
           const login =(email,passowrd)=>{
@@ -29,6 +31,16 @@ const AuthProvider = ({children}) => {
         return   signOut(auth)
        }
 // //////////////////////////////
+        // Social provider 
+        const GoogleProvider = new GoogleAuthProvider();    
+
+   const googleLogin=()=>{
+   return signInWithPopup(auth,GoogleProvider)
+   }
+
+
+// ////////////////////////////
+// observeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             
        useEffect( ()=>{
         const Unsubscribe = onAuthStateChanged(auth, (Cuuretuser) => {
@@ -45,7 +57,8 @@ const AuthProvider = ({children}) => {
         loading,
         Creatuser,
         login,
-        LogOut
+        LogOut,
+        googleLogin
     };
      
     return (

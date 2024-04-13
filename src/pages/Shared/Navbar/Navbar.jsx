@@ -5,7 +5,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
   const{user,LogOut} = useContext(AuthContext);
-
+ console.log(user)   
     const  signOut =() =>{
         LogOut()
         .then()
@@ -40,14 +40,21 @@ const Navbar = () => {
             </div>
            
             <div className="navbar-end">
-            {
+                  {
                   user&& <p>{user.email}</p>  
-                }
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  }
+                  {
+                    user ?  <div className="tooltip tooltip-bottom " data-tip={user.displayName?user.displayName:'rtrtrtr'}>
+                   <button>    { user.photoURL?<img className="w-10  rounded-full  " src={user.photoURL} 
+                alt="" /> :  <img className="w-10 rounded-full "   src="https://i.ibb.co/fNwwgLr/christoph-nolte-hf2-Jc-GFgypg-unsplash.jpg" alt="" />   }  </button>
+                            </div> 
+                     :
+                  
+                   <label  tabIndex={0} className="btn tooltip  btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                         <img src={userDefaultPic} />
                     </div>
-                </label>
+                  </label>}
                 {
                     user ? <button onClick={signOut}  className="btn">Sign Out</button> 
                     :
